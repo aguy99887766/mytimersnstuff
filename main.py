@@ -1,15 +1,16 @@
 '''
 Updates:
 Added stopwatch
+Added menu and frames
 
 '''
 
 
 import tkinter as tk
-import GUI
+import menu
 def main():
-    version = "0.0.1"   
-    root = GUI.stopwatch()
+    version = "0.0.2"   
+    root = menu.MainMenu()
     root.title(f"Timer {version}")
     root.geometry("300x300")
     root.mainloop()
