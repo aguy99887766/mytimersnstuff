@@ -1,17 +1,16 @@
-'''
-Updates:
-Added stopwatch
-Added menu and frames
-
-'''
-
 
 import tkinter as tk
 import menu
+
+'''
+Main window, title and version can be changed here
+'''
+
 def main():
-    version = "0.0.2"   
+    program = "My clock"
+    version = "02/27/25"   
     root = menu.MainMenu()
-    root.title(f"Timer {version}")
+    root.title(f"{program} version: {version}")
     root.geometry("300x300")
     root.mainloop()
     

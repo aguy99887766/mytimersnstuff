@@ -1,5 +1,9 @@
 import tkinter as tk
+import other
 import stopwatch
+import events
+import timer_1
+
 class MainMenu(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -14,7 +18,7 @@ class MainMenu(tk.Tk):
 
         self.frames = {}
 
-        for F in (Start, stopwatch.Stopwatch, wip):
+        for F in (Start, stopwatch.Stopwatch, wip, timer_1.Timer, events.Events, other.Other):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -28,14 +32,22 @@ class MainMenu(tk.Tk):
 
 class Start(tk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self,parent)
+        tk.Frame.__init__(self, parent)
 
-        self.label_menu = tk.Label(self, text="Timer")
-        self.label_menu.pack()
+        self.other_select = tk.Button(self, text="Other", command=lambda: controller.show_frame(other.Other))
+        self.other_select.pack(side="top", anchor="w", pady=5, padx=10)
+
+        self.label_menu = tk.Label(self, text="My Clock")
+        self.label_menu.pack(pady=20)
+
         self.stopwatch_select = tk.Button(self, text="Stopwatch", command=lambda: controller.show_frame(stopwatch.Stopwatch))
-        self.stopwatch_select.pack()
-        self.timer_select = tk.Button(self, text="Timer", command=lambda: controller.show_frame(wip))
-        self.timer_select.pack()
+        self.stopwatch_select.pack(pady=5)
+        self.timer_select = tk.Button(self, text="Timer", command=lambda: controller.show_frame(timer_1.Timer))
+        self.timer_select.pack(pady=5)
+        self.scheduler_select = tk.Button(self, text="Events", command=lambda: controller.show_frame(events.Events))
+        self.scheduler_select.pack(pady=5)
+        self.settings_select = tk.Button(self, text="Settings", command=lambda: controller.show_frame(wip))
+        self.settings_select.pack(pady=5)
 
 class wip(tk.Frame):
     def __init__(self, parent, controller):
@@ -45,5 +57,7 @@ class wip(tk.Frame):
         self.label_wip.pack()
         self.leave = tk.Button(self, text="Back", command=lambda: controller.show_frame(Start))
         self.leave.pack(side=tk.BOTTOM, fill=tk.X)
+
+
 
 
