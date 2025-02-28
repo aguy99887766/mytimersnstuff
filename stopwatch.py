@@ -62,5 +62,5 @@ class Stopwatch(tk.Frame):
     def reset_lap_display(self):
         self.display_laps.delete(0, tk.END)
         for num, (sec, min, hour) in self.lap_dict.items():
-            self.display_laps.insert(tk.END, f"{num}. {hour:02}:{min:02}:{sec:02}")
+            self.display_laps.insert(tk.END, f"{num+1}. {hour:02}:{min:02}:{sec:02}")
         self.display_laps.pack()
