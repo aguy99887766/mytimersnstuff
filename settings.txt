@@ -1,0 +1,17 @@
+# All the colors that trinket supports are acceptable
+# Information about colors: https://www.askpython.com/python-modules/tkinter/tkinter-colors
+# Menu
+button_menu:gray
+button_back :red
+background:  black
+listbox:gray
+button_delete:red
+# General Time
+button_start:green
+button_stop:red
+increment:dark green
+decrement:dark red
+button_save:gray
+button_load:gray
+# Stopwatch
+button_lap:orange

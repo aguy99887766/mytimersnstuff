@@ -1,10 +1,6 @@
 To do:
     Add logging
-    Add hours
-    Add edit event and check if event is active
-    Add more customization/themeing
-    Make documenation/comments
-    Add ability to change timer name
+    Add edit event and check if event is active (kind of....)
     Make code look nicer / use less code
 
 Done:
@@ -22,3 +18,10 @@ Done:
         Fixed bugs within timer 
         Added others
         Added laps to stopwatch
+        Added hours
+    03/04/24:
+        Fixed a bug that caused the current date to display the first date in the file
+        Events is mostly functional just need "Active and In-active"
+        Added colors and customization options
+        Added classes to events.py (looking to do the same for timer_1.py)
+        Documented Code

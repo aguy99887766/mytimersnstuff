@@ -3,13 +3,20 @@ import other
 import stopwatch
 import events
 import timer_1
+import settings
+'''
+This is the main menu class and is used when the user decides to start the program
 
+
+This entire area is where the user is most of the time, everything is controlled by frame which lets the user navigate without having to deal with
+many different windows at once.
+'''
 class MainMenu(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         
         tk.Tk.__init__(self, *args, **kwargs)
-        container = tk.Frame(self)
+        container = tk.Frame(self)      
 
         container.pack(side="top", fill="both", expand = True)
 
@@ -18,12 +25,14 @@ class MainMenu(tk.Tk):
 
         self.frames = {}
 
-        for F in (Start, stopwatch.Stopwatch, wip, timer_1.Timer, events.Events, other.Other):
+        for F in (Start, stopwatch.Stopwatch, timer_1.Timer, events.Events, other.Other, settings.Settings):    #Each menu the user can select
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame(Start)
+    
+
+        self.show_frame(Start)      
 
     def show_frame(self, cont):
 
@@ -34,30 +43,32 @@ class Start(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        self.other_select = tk.Button(self, text="Other", command=lambda: controller.show_frame(other.Other))
-        self.other_select.pack(side="top", anchor="w", pady=5, padx=10)
+        settings.Settings.selected_colors(self)     #This is for the user's configuration    
 
-        self.label_menu = tk.Label(self, text="My Clock")
+        self.configure(bg=self.background_color)    #This sets the background to whatever the user choose 
+
+        self.other_select = tk.Button(self, text="Other", command=lambda: controller.show_frame(other.Other), bg=self.button_menu_color)        #This is the others menu that is located on the top left of the screen
+        self.other_select.pack(side="top", anchor="w", pady=5, padx=10)     
+
+        self.label_menu = tk.Label(self, text="My Clock", font=("Arial", 20), bg=self.background_color, fg=self.title_text_color)       #This is the name of the program
         self.label_menu.pack(pady=20)
 
-        self.stopwatch_select = tk.Button(self, text="Stopwatch", command=lambda: controller.show_frame(stopwatch.Stopwatch))
+        self.stopwatch_select = tk.Button(self, text="Stopwatch", command=lambda: controller.show_frame(stopwatch.Stopwatch), bg=self.button_menu_color)        #This is the stopwatch and will bring the user to the stopwatch
         self.stopwatch_select.pack(pady=5)
-        self.timer_select = tk.Button(self, text="Timer", command=lambda: controller.show_frame(timer_1.Timer))
+        self.timer_select = tk.Button(self, text="Timer", command=lambda: controller.show_frame(timer_1.Timer), bg=self.button_menu_color)      #Timer button
         self.timer_select.pack(pady=5)
-        self.scheduler_select = tk.Button(self, text="Events", command=lambda: controller.show_frame(events.Events))
+        self.scheduler_select = tk.Button(self, text="Events", command=lambda: controller.show_frame(events.Events), bg=self.button_menu_color)     #Events button
         self.scheduler_select.pack(pady=5)
-        self.settings_select = tk.Button(self, text="Settings", command=lambda: controller.show_frame(wip))
+        self.settings_select = tk.Button(self, text="Settings", command=lambda: controller.show_frame(settings.Settings), bg=self.button_menu_color)    #Settings button
         self.settings_select.pack(pady=5)
-
+'''
+Obsolute code that is not used due to everything being developed
+'''
 class wip(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
         self.label_wip = tk.Label(self, text="This is not developed.")
         self.label_wip.pack()
-        self.leave = tk.Button(self, text="Back", command=lambda: controller.show_frame(Start))
+        self.leave = tk.Button(self, text="Back", command=lambda: controller.show_frame(Start))     #Leave
         self.leave.pack(side=tk.BOTTOM, fill=tk.X)
-
-
-
-
