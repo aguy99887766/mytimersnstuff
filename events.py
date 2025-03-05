@@ -25,14 +25,14 @@ class Events(tk.Frame):
         self.month = int(self.user_date[1])
         self.year = int(self.user_date[2])
 
-        self.label = tk.Label(self, text=f"Events", font=("Arial", 10), fg=self.title_text_color, bg=self.background_color) #Events button
+        self.label = tk.Label(self, text=f"Events", font=("Arial", 20), fg=self.title_text_color, bg=self.background_color) #Events button
         self.label.pack()
-
-        self.add_event = tk.Button(self, text="Add Event", command=lambda: Create_events(self), bg=self.button_save_color)  #Add event
-        self.add_event.pack(padx=5)
 
         self.current_events = tk.Listbox(self, bg=self.listbox_color)   #All events that are saved
         self.load_saved_events()
+
+        self.add_event = tk.Button(self, text="Add Event", command=lambda: Create_events(self), bg=self.button_save_color)  #Add event
+        self.add_event.pack(padx=5)
 
         self.load_event = tk.Button(self, text="Change Settings", command=lambda: Edit_events(self), bg=self.button_load_color) #Edit event configuration
         self.load_event.pack()

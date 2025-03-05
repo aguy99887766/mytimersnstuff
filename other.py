@@ -28,7 +28,7 @@ class Other(tk.Frame):
         text_area = tk.Text(load_window, wrap=tk.WORD)
         text_area.pack()
         load_window.title("Progress")
-        filepath = rf"C:\Users\{self.username}\Documents\Python\stuff.txt"      #Filepath of the document that is needed
+        filepath = rf"C:\Users\{self.username}\Documents\Python\Final Project\stuff.txt"      #Filepath of the document that is needed
         try:
             with open(filepath, 'r') as file:       #Opens a window for the user to read the contents of the text
                 content = file.read()

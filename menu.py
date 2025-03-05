@@ -50,7 +50,7 @@ class Start(tk.Frame):
         self.other_select = tk.Button(self, text="Other", command=lambda: controller.show_frame(other.Other), bg=self.button_menu_color)        #This is the others menu that is located on the top left of the screen
         self.other_select.pack(side="top", anchor="w", pady=5, padx=10)     
 
-        self.label_menu = tk.Label(self, text="My Clock", font=("Arial", 20), bg=self.background_color, fg=self.title_text_color)       #This is the name of the program
+        self.label_menu = tk.Label(self, text="𝓜𝔂 𝓒𝓵𝓸𝓬𝓴", font=("Arial", 20), bg=self.background_color, fg=self.title_text_color)       #This is the name of the program
         self.label_menu.pack(pady=20)
 
         self.stopwatch_select = tk.Button(self, text="Stopwatch", command=lambda: controller.show_frame(stopwatch.Stopwatch), bg=self.button_menu_color)        #This is the stopwatch and will bring the user to the stopwatch
@@ -61,14 +61,8 @@ class Start(tk.Frame):
         self.scheduler_select.pack(pady=5)
         self.settings_select = tk.Button(self, text="Settings", command=lambda: controller.show_frame(settings.Settings), bg=self.button_menu_color)    #Settings button
         self.settings_select.pack(pady=5)
-'''
-Obsolute code that is not used due to everything being developed
-'''
-class wip(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        self.exit_program = tk.Button(self, text="Exit Program", command=self.leave, bg=self.button_back_color)
+        self.exit_program.pack(pady=5)
 
-        self.label_wip = tk.Label(self, text="This is not developed.")
-        self.label_wip.pack()
-        self.leave = tk.Button(self, text="Back", command=lambda: controller.show_frame(Start))     #Leave
-        self.leave.pack(side=tk.BOTTOM, fill=tk.X)
+    def leave(self):
+        self.quit()
