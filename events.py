@@ -28,6 +28,9 @@ class Events(tk.Frame):
         self.label = tk.Label(self, text=f"Events", font=("Arial", 20), fg=self.title_text_color, bg=self.background_color) #Events button
         self.label.pack()
 
+        self.info = tk.Label(self, text="Events is currently using Day Month Year", fg=self.title_text_color, bg=self.background_color)
+        self.info.pack()
+
         self.current_events = tk.Listbox(self, bg=self.listbox_color)   #All events that are saved
         self.load_saved_events()
 
@@ -60,11 +63,16 @@ class Events(tk.Frame):
                 lines = file.readlines()
                 for line in lines:
                     line = line.strip()
-                    if line:    #Checks if line is blank or not
-                        self.event_name, self.event_day, self.event_month, self.event_year = line.strip().split(":", 3) #Puts everythin in a list
-                        self.desired_date = datetime.datetime(int(self.event_year), int(self.event_month), int(self.event_day)) #Selected date on the file
-                        self.check_active() #Ignore, used for debugging future stuff
-                        self.events_list[self.event_name] = (self.event_day, self.event_month, self.event_year) #Puts the event name into a dictionary
+                    try:    
+                        if line:    #Checks if line is blank or not
+                            self.event_name, self.event_day, self.event_month, self.event_year = line.strip().split(":", 3) #Puts everythin in a list
+                            self.desired_date = datetime.datetime(int(self.event_year), int(self.event_month), int(self.event_day)) #Selected date on the file
+                            self.check_active() #Ignore, used for debugging future stuff
+                            self.events_list[self.event_name] = (self.event_day, self.event_month, self.event_year) #Puts the event name into a dictionary
+                    except ValueError:
+                        print("This line is in the wrong format, skipping")
+                    except:
+                        print("Something wrong has happened... skipping...")
                 for name, (day, month, year) in self.events_list.items():   #Inserts dictionary into the boxlist
                     self.current_events.insert(tk.END, f"{name}: {int(day)}/{int(month)}/{int(year)}")
             self.current_events.pack()  #Creates boxlist
@@ -141,12 +149,14 @@ class Edit_events(tk.Frame):
         print(event_to_delete)  #Debugging
         with open("event_save.txt", "r") as file:
             lines = file.readlines()
-        
-        with open("event_save.txt", "w") as file:
-            for line in lines:
-                event_name, _, _, _ = line.strip().split(":")
-                if event_name != event_to_delete:
-                    file.write(line)
+        try:
+            with open("event_save.txt", "w") as file:
+                for line in lines:
+                    event_name, _, _, _ = line.strip().split(":")
+                    if event_name != event_to_delete:
+                        file.write(line)
+        except:
+            print(f"Error: something went wrong!")
     
         self.parent_frame.load_saved_events()    #Updates saved events
         self.load_window.destroy()  #Closes window
@@ -282,8 +292,12 @@ class Create_events(tk.Frame):
         self.title = self.save_event_entry.get()
         if not self.title:
             self.title = "unnamed event"
-        with open("event_save.txt", "a") as file:
-            file.write(f"{self.title}:{self.user_date[0]}:{self.user_date[1]}:{self.user_date[2]}\n")
+        if ":" not in self.title:
+            with open("event_save.txt", "a") as file:
+                file.write(f"{self.title}:{self.user_date[0]}:{self.user_date[1]}:{self.user_date[2]}\n")
+        else:
+            print("Do not put : in title")
+
          
         self.parent_frame.load_saved_events()
 

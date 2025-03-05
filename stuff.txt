@@ -29,4 +29,5 @@ Done:
         Fixed date for previous log
         Added popup explaining the project
         Better exception handling
-
+        Fixed a severe bug in events that causes the load script to fail completely due to the user being able to put a colon in the name
+        The "Other Stuff" menu has support for custom backgrounds

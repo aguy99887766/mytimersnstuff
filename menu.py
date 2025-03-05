@@ -44,10 +44,11 @@ class MainMenu(tk.Tk):
 
 class Start(tk.Frame):
     def __init__(self, parent, controller):
+        self.name = "someguy"
         tk.Frame.__init__(self, parent)
         settings.Settings.selected_colors(self)     #This is for the user's configuration    
 
-        self.configure(bg=self.background_color)    #This sets the background to whatever the user choose 
+        self.configure(bg=self.background_color)    #This sets the background to whatever the user chooses
 
 
         self.other_select = tk.Button(self, text="Other", command=lambda: controller.show_frame(other.Other), background=self.button_menu_color)        #This is the others menu that is located on the top left of the screen
@@ -67,6 +68,8 @@ class Start(tk.Frame):
         self.exit_program = tk.Button(self, text="Exit Program", command=self.leave, bg=self.button_back_color)
         self.exit_program.pack(pady=5)
 
+        self.label_name = tk.Label(self, text=f"Creator: {self.name}", bg=self.background_color, fg=self.title_text_color)
+        self.label_name.pack(side="bottom", anchor="w", pady=5, padx=10)  
     
 
     def leave(self):
