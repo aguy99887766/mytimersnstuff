@@ -9,19 +9,8 @@ class Settings(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.alert_label = tk.Label(self, text="Due to time, the color settings will have to be modified using the text file", font=("Arial", 15), fg="red")
+        self.alert_label = tk.Label(self, text="The color settings will have to be modified using the text file", font=("Arial", 15), fg="red")
         self.alert_label.pack()
-
-        message = '''
-        the syntax for the settings.txt file is simple.
-        (name of setting):(desired option)
-        there are no spaces between the name of the setting and the option.
-        If you do not want to do this then your experience will not be affected since the settings
-        are cosmetic and meant to change the colors.
-        The list of colors will be listed on the file
-        '''     #Displayed message
-        self.alert_label_2 = tk.Label(self, text=message, fg="red")
-        self.alert_label_2.pack()
 
         self.leave = tk.Button(self, text="Back", command=lambda: controller.show_frame(menu.Start))    #Back button
         self.leave.pack()
