@@ -71,6 +71,8 @@ class Events(tk.Frame):
             
         except FileNotFoundError:
             pass    #Skips
+        except ValueError:
+            print("This is has causes and error")
 
 
 
