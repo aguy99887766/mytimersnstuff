@@ -105,15 +105,30 @@ class Timer(tk.Frame):
     def erase_selected_timer(self):     #Erases timers
         timer_to_delete = self.timers_list.get(tk.ACTIVE)   #Get active selection
         print(timer_to_delete)  #Debugging
-        with open("timer_save.txt", "r") as file:
-            lines = file.readlines()
+        try:
+            with open("timer_save.txt", "r") as file:
+                lines = file.readlines()
+            
+            with open("timer_save.txt", "w") as file:
+                for line in lines:
+                    timer_name, _ = line.strip().split(":")
+                    if timer_name != timer_to_delete:
+                        file.write(line)
+            self.load_saved_timers()    #Updates saved timers
+        except ValueError as e:
+            self.error_label.config(text="This value is using the incorrect format, but was deleted")    #Error message
+            self.error_label.pack()
+            print(f"{e}")
+            self.load_saved_timers()    #Updates saved timers
+        except FileNotFoundError:
+            self.error_label.config(text="File could not be found")    #Error message
+            self.error_label.pack()
+            print(f"{e}")
+        except:
+            self.error_label.config(text="Something went wrong...")    #Error message
+            self.error_label.pack()
+            print(f"{e}")
         
-        with open("timer_save.txt", "w") as file:
-            for line in lines:
-                timer_name, _ = line.strip().split(":")
-                if timer_name != timer_to_delete:
-                    file.write(line)
-        self.load_saved_timers()    #Updates saved timers
 
     def load_selected_timer(self):  #Loads the selected timer
         try:    #Checks the format of the file to see if the user put something incorrectly without errors

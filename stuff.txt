@@ -19,9 +19,14 @@ Done:
         Added others
         Added laps to stopwatch
         Added hours
-    03/04/24:
+    03/04/25:
         Fixed a bug that caused the current date to display the first date in the file
         Events is mostly functional just need "Active and In-active"
         Added colors and customization options
         Added classes to events.py (looking to do the same for timer_1.py)
         Documented Code
+    03/05/25:
+        Fixed date for previous log
+        Added popup explaining the project
+        Better exception handling
+

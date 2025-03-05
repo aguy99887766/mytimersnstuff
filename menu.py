@@ -4,6 +4,7 @@ import stopwatch
 import events
 import timer_1
 import settings
+import popup
 '''
 This is the main menu class and is used when the user decides to start the program
 
@@ -32,22 +33,24 @@ class MainMenu(tk.Tk):
 
     
 
-        self.show_frame(Start)      
+        self.show_frame(Start) 
+        popup.Popup(container, self)  
 
     def show_frame(self, cont):
 
         frame = self.frames[cont]
         frame.tkraise()
 
+
 class Start(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-
         settings.Settings.selected_colors(self)     #This is for the user's configuration    
 
         self.configure(bg=self.background_color)    #This sets the background to whatever the user choose 
 
-        self.other_select = tk.Button(self, text="Other", command=lambda: controller.show_frame(other.Other), bg=self.button_menu_color)        #This is the others menu that is located on the top left of the screen
+
+        self.other_select = tk.Button(self, text="Other", command=lambda: controller.show_frame(other.Other), background=self.button_menu_color)        #This is the others menu that is located on the top left of the screen
         self.other_select.pack(side="top", anchor="w", pady=5, padx=10)     
 
         self.label_menu = tk.Label(self, text="𝓜𝔂 𝓒𝓵𝓸𝓬𝓴", font=("Arial", 20), bg=self.background_color, fg=self.title_text_color)       #This is the name of the program
@@ -63,6 +66,8 @@ class Start(tk.Frame):
         self.settings_select.pack(pady=5)
         self.exit_program = tk.Button(self, text="Exit Program", command=self.leave, bg=self.button_back_color)
         self.exit_program.pack(pady=5)
+
+    
 
     def leave(self):
         self.quit()
